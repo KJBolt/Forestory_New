@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="aloette.purchase_order_template">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; font-size: 12px; line-height: 1.4; color: #333;">
+                        <!-- Invoice Container -->
+                        <div style="width: 100%; max-width: 800px; margin: 0 auto; border: 1px solid #000; padding: 0;">
+                            <!-- Header -->
+                            <div style="display: flex; -webkit-box-pack: center; align-items: center; padding: 15px 20px; border-bottom: 1px solid #000;">
+                                <div style="flex: 1; display: -webkit-box; -webkit-box-pack: justify; display: flex; justify-content: space-between;">
+                                    <div>
+                                        <h1 style="font-size: 24px; font-weight: bold; margin: 0 0 2px 0;">ALOETTE</h1>
+                                        <div style="font-size: 14px; font-weight: bold; margin: 2px 0;">MEDICAL SKIN CARE CENTER</div>
+                                        <div style="font-style: italic; margin: 2px 0 10px 0; font-size: 11px;">Timeless Beauty For All Ages</div>
+                                    </div>
+                                    <div>
+                                        <div><strong>Mob:</strong> +233 277 580 559</div>
+                                        <div style="margin-left: 25px;">+233 277 580 558</div>
+                                        <div style="margin-left: 25px;">+233 509 041 371</div>
+                                        <div style="margin-left: 25px;">+233 302 969 137</div>
+                                        <div><strong>Kumasi:</strong> Next to Shell</div>
+                                        <div style="margin-left: 25px;">filling station on the</div>
+                                        <div style="margin-left: 25px;">Patasi Main Road</div>
+                                    </div>
+                                    <div>
+                                        <div><strong>Osu:</strong> Behind Osu Post Office</div>
+                                        <div><strong>East Legon:</strong> No 6 Asoyi Ave</div>
+                                        <div style="margin-left: 25px;">Achampong Junction</div>
+                                        <br/>
+                                        <div><strong>E-mail:</strong> aloettgh@yahoo.com</div>
+                                        <div><strong>Website:</strong> www.aloette.com</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Invoice Title and Number -->
+                            <div style="display: -webkit-box; -webkit-box-pack: justify; -webkit-box-align: center; margin: 20px 0px; padding: 0 20px;">
+                                <div style="background: #000; color: white; padding: 8px 15px; font-weight: bold; font-size: 14px; display: inline-block;">
+                                    Purchase Order
+                                </div>
+                                <div style="font-size: 16px; font-weight: bold;">
+                                    N°: <span t-esc="docs[0].name"/>
+                                </div>
+                                <div>
+                                    Date: <span t-esc="docs[0].date_order"/>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer Information -->
+                            <div style="display: -webkit-box; -webkit-box-pack: justify; -webkit-box-align: center; margin-bottom: 10px;">
+                                <div style="padding: 0 20px 15px 20px;">
+                                    <div style="display: -webkit-box; -webkit-box-align: center;">
+                                        <div style="min-width: 120px; font-weight: bold;">Customer Name:</div>
+                                        <div style="flex: 1; padding: 2px;">
+                                            <span t-field="docs[0].partner_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div style="display: -webkit-box; -webkit-box-align: center;">
+                                        <div style="min-width: 120px; font-weight: bold;">Telephone:</div>
+                                        <div style="flex: 1; padding: 2px;">
+                                            <span t-field="docs[0].partner_id.phone"/>
+                                        </div>
+                                    </div>
+                                    <div style="display: -webkit-box; -webkit-box-align: center;">
+                                        <div style="min-width: 120px; font-weight: bold;">Address:</div>
+                                        <div style="flex: 1; padding: 2px;">
+                                            <span t-field="docs[0].partner_id.street"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display: -webkit-box; -webkit-box-pack: justify; -webkit-box-align: center;">
+                                        <div style="min-width: 120px; font-weight: bold;">Old Balance:</div>
+                                        <div style="flex: 1; padding: 2px;">
+                                            <span t-field="docs[0].partner_id.street"/>
+                                        </div>
+                                    </div>
+                                    <div style="display: -webkit-box; -webkit-box-pack: justify; -webkit-box-align: center;">
+                                        <div style="min-width: 120px; font-weight: bold;">Current Balance:</div>
+                                        <div style="flex: 1; padding: 2px;">
+                                            <span t-field="docs[0].partner_id.street"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Items Table -->
+                            <table style="width: 100%; border-collapse: collapse; margin: 0; table-layout: auto;">
+                                <thead>
+                                    <tr style="background: #000; color: white;">
+                                        <th style="width: 60px; text-align: center; padding: 8px; border-right: 0.5px solid #fff;">PRODUCT</th>
+                                        <th style="padding: 8px; border-right: 0.5px solid #fff; text-align: left;">USE</th>
+                                        <th style="width: 80px; text-align: right; padding: 8px; border-right: 0.5px solid #fff;">QTY</th>
+                                        <th style="width: 80px; text-align: right; padding: 8px;">PRICE</th>
+                                        <th style="width: 80px; text-align: right; padding: 8px;">SUBTOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="docs[0].order_line" t-as="line" style="height: 30px;">
+                                        <td style="text-align: center; border: 1px solid #000; padding: 8px; white-space: nowrap;">
+                                            <span t-field="line.product_id.name"/>
+                                        </td>
+                                        <td style="border: 1px solid #000; padding: 8px;">
+                                            <span t-field="line.use"/>
+                                        </td>
+                                        <td style="text-align: right; border: 1px solid #000; padding: 8px;">
+                                            <span t-esc="'%.2f' % line.product_uom_qty"/>
+                                        </td>
+                                        <td style="text-align: right; border: 1px solid #000; padding: 8px;">
+                                            <span t-esc="'%.2f' % line.price_unit"/>
+                                        </td>
+                                        <td style="text-align: right; border: 1px solid #000; padding: 8px;">
+                                            <span t-esc="'%.2f' % line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-foreach="range(max(0, 10 - len(docs[0].order_line)))" t-as="i" style="height: 30px;">
+                                        <td style="border: 1px solid #000; padding: 8px;"></td>
+                                        <td style="border: 1px solid #000; padding: 8px;"></td>
+                                        <td style="border: 1px solid #000; padding: 8px;"></td>
+                                        <td style="border: 1px solid #000; padding: 8px;"></td>
+                                        <td style="border: 1px solid #000; padding: 8px;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <!-- Total -->
+                            <div style="font-size: 16px; text-align: right; padding: 15px 20px; border-top: 1px solid #000; font-weight: bold;">
+                                TOTAL: GH¢ <span t-esc="'%.2f' % docs[0].amount_total"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- custom pager format -->
+        <record id="paperformat_aloette_purchase_order" model="report.paperformat">
+            <field name="name">Custom Purchase Order report</field>
+            <field name="default" eval="False"/>
+            <field name="disable_shrinking" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <record id="aloette.action_purchase_order_template" model="ir.actions.report">
+            <field name="name">Print Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">aloette.purchase_order_template</field>
+            <field name="report_file">aloette.purchase_order_template</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_aloette_purchase_order"/>
+        </record>
+    </data>
+</odoo>

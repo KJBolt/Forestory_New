@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Access -->
+    <record id="access_skin_consultation" model="ir.model.access">
+        <field name="name">Skin Consultation</field>
+        <field name="model_id" ref="model_skin_consultation"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_skin_consultation_tree" model="ir.ui.view">
+        <field name="name">skin.consultation.tree</field>
+        <field name="model">skin.consultation</field>
+        <field name="arch" type="xml">
+            <tree string="Skin Consultation" create="false">
+                <field name="customer_id" />
+                <field name="like_about_skin_display"/>
+                <field name="improve_about_skin_display"/> 
+                <field name="vascularity"/>
+                <field name="skin_texture"/>
+                <field name="pigmentation"/>
+                <field name="hydration"/>
+                <field name="sebaceous_activity"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_skin_consultation_form" model="ir.ui.view">
+        <field name="name">skin.consultation.form</field>
+        <field name="model">skin.consultation</field>
+        <field name="arch" type="xml">
+            <form string="Skin Consultation">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_prescribe" type="object" icon="fa-medkit">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Prescribe Medication</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Customer Details">
+                            <field name="customer_id" readonly="1"/>
+                        </group>
+                        <group string="Skin Likes">
+                            <field name="like_about_skin_display" readonly="1"/>
+                        </group>
+                        <group string="Skin Improvement">
+                            <field name="improve_about_skin_display" readonly="1"/>
+                        </group>
+                        <group string="Skin Vascularity">
+                            <field name="vascularity" readonly="1"/>
+                            <field name="vascularity_comment" readonly="1" invisible="vascularity != 'other'"/>
+                        </group>
+                        <group string="Skin Texture">
+                            <field name="skin_texture" readonly="1"/>
+                            <field name="skin_texture_comment" readonly="1" invisible="skin_texture != 'other'"/>
+                        </group>
+                        <group string="Skin Pigmentation">
+                            <field name="pigmentation" readonly="1"/>
+                            <field name="pigmentation_comment" readonly="1" invisible="pigmentation != 'other'"/>
+                        </group>
+                        <group string="Skin Hydration">
+                            <field name="hydration" readonly="1"/>
+                            <field name="hydration_comment" readonly="1" invisible="hydration != 'other'"/>
+                        </group>
+                        <group string="Skin Sebaceous Activity">
+                            <field name="sebaceous_activity" readonly="1"/>
+                            <field name="sebaceous_activity_comment" readonly="1" invisible="sebaceous_activity != 'other'"/>
+                        </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_skin_consultation" model="ir.actions.client">
+        <field name="name">Skin Consultation</field>
+        <field name="tag">aloette.SkinConsultation</field>
+    </record>
+
+    <!-- Action Window -->
+    <record id="action_skin_consultation_window" model="ir.actions.act_window">
+        <field name="name">Skin Consultation</field>
+        <field name="res_model">skin.consultation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">main</field>
+    </record>
+
+    <!-- Menuitem -->
+    <menuitem
+        id="menu_skin_consultation"
+        name="Skin Consultation"
+        action="action_skin_consultation"
+        sequence="1"
+        web_icon="aloette,static/description/icon.png"
+    />
+
+    <!-- Menuitem -->
+    <menuitem
+        id="menu_skin_consultation_window"
+        name="Medication"
+        action="action_skin_consultation_window"
+        sequence="2"
+        web_icon="aloette,static/description/medicine.png"
+    />
+</odoo>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="aloette.SkinConsultation">
+        <div class="skin-consultation">
+            <div class="container mt-4 d-flex justify-content-center align-items-center">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <img src="/aloette/static/src/img/logo.png" alt="Aloette Logo" class="mb-2" style="max-width: 200px"/>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <form t-on-submit.prevent="onSubmit">
+                            <t t-if="state.currentStep === 1">
+                                <!-- Customer -->
+                                <div class="mb-4">
+                                    <label class="form-label">Select a customer</label>
+                                    <select class="form-control" t-model="state.customerId" t-on-change="redirectToContacts">
+                                        <option value="" t-att-disabled='true'>Select a customer</option>
+                                        <option t-foreach="state.customers" t-as="customer" t-key="customer.id" t-att-value="customer.id">
+                                            <t t-esc="customer.name"/>
+                                        </option>
+                                        <option value="create" style="color: #1989ce;">Create New</option>
+                                    </select>
+                                </div>
+
+
+                                <!-- Like About Skin -->
+                                <div class="mb-4">
+                                    <label class="form-label">What are the 3 things you like about your skin?</label>
+                                    <div class="form-check" t-foreach="skinAttributes" t-as="attribute" t-key="attribute.id">
+                                        <input class="form-check-input" 
+                                            type="checkbox" 
+                                            t-att-id="'like_' + attribute.id"
+                                            t-att-value="attribute.id"
+                                            t-on-change="(ev) => this.updateLikes(attribute.id, ev.target.checked)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'like_' + attribute.id">
+                                            <t t-esc="attribute.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.likes.includes(4)">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'like_comment'"
+                                                t-model="state.likeComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                            
+
+                            
+                            <t t-if="state.currentStep === 2">
+                                <!-- Improve About Skin -->
+                                <div class="mb-4">
+                                    <label class="form-label">What are the 3 things you like to improve about your skin?</label>
+                                    <div class="form-check" t-foreach="skinAttributes" t-as="attribute" t-key="attribute.id">
+                                        <input class="form-check-input" 
+                                            type="checkbox" 
+                                            t-att-id="'improve_' + attribute.id"
+                                            t-att-value="attribute.id"
+                                            t-on-change="(ev) => this.updateImprovements(attribute.id, ev.target.checked)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'improve_' + attribute.id">
+                                            <t t-esc="attribute.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.improvements.includes(4)">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'improve_comment'"
+                                                t-model="state.improveComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+
+                                <!-- Vascularity -->
+                                <div class="mb-4">
+                                    <label class="form-label">VASCULARITY - How would you describe your vascularity (visibility of veins)?</label>
+                                    <div class="form-check" t-foreach="vascularityOptions" t-as="option" t-key="option.id">
+                                        <input class="form-check-input" 
+                                            type="radio" 
+                                            name="vascularity"
+                                            t-att-id="'vascularity_' + option.id"
+                                            t-att-value="option.id"
+                                            t-on-change="(ev) => this.updateVascularity(option.id)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'vascularity_' + option.id">
+                                            <t t-esc="option.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.vascularity == 4">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'vascularity_comment'"
+                                                t-model="state.vascularityComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+
+                            <t t-if="state.currentStep === 3">
+                                <!-- Skin Texture -->
+                                <div class="mb-4">
+                                    <label class="form-label">SKIN TEXTURE - How would you describe the texture of your skin?</label>
+                                    <div class="form-check" t-foreach="skinTextureOptions" t-as="option" t-key="option.id">
+                                        <input class="form-check-input" 
+                                            type="radio" 
+                                            name="skinTexture"
+                                            t-att-id="'skinTexture_' + option.id"
+                                            t-att-value="option.id"
+                                            t-on-change="(ev) => this.updateSkinTexture(option.id)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'skinTexture_' + option.id">
+                                            <t t-esc="option.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.skinTexture === 4">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'skinTexture_comment'"
+                                                t-model="state.skinTextureComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+
+                                <!-- Depth of Pigmentation -->
+                                <div class="mb-4">
+                                    <label class="form-label">DEPTH OF PIGMENTATION - How would you describe the depth of your skin pigmentation?</label>
+                                    <div class="form-check" t-foreach="depthOfPigmentationOptions" t-as="option" t-key="option.id">
+                                        <input class="form-check-input" 
+                                            type="radio" 
+                                            name="depthOfPigmentation"
+                                            t-att-id="'pigmentation_' + option.id"
+                                            t-att-value="option.id"
+                                            t-on-change="(ev) => this.updatePigmentation(option.id)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'pigmentation_' + option.id">
+                                            <t t-esc="option.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.pigmentation === 4">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'pigmentation_comment'"
+                                                t-model="state.pigmentationComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                            
+
+                            <t t-if="state.currentStep === 4">
+                                <!-- Hydration Level -->
+                                <div class="mb-4">
+                                    <label class="form-label">HYDRATION LEVEL - How would you describe your skin’s hydration level?</label>
+                                    <div class="form-check" t-foreach="hydrationLevelOptions" t-as="option" t-key="option.id">
+                                        <input class="form-check-input" 
+                                            type="radio" 
+                                            name="hydrationLevel"
+                                            t-att-id="'hydration_' + option.id"
+                                            t-att-value="option.id"
+                                            t-on-change="(ev) => this.updateHydration(option.id)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'hydration_' + option.id">
+                                            <t t-esc="option.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.hydration === 4">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'hydration_comment'"
+                                                t-model="state.hydrationComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+
+                                <!-- Sebaceous Activity -->
+                                <div class="mb-4">
+                                    <label class="form-label">SEBACEOUS ACTIVITY - How would you describe your skin’s oil (sebum) production?</label>
+                                    <div class="form-check" t-foreach="sebaceousActivityOptions" t-as="option" t-key="option.id">
+                                        <input class="form-check-input" 
+                                            type="radio" 
+                                            name="sebaceousActivity"
+                                            t-att-id="'sebaceousActivity_' + option.id"
+                                            t-att-value="option.id"
+                                            t-on-change="(ev) => this.updateSebaceousActivity(option.id)"
+                                        />
+                                        <label class="form-check-label" t-att-for="'sebaceousActivity_' + option.id">
+                                            <t t-esc="option.name"/>
+                                        </label>
+                                    </div>
+                                    <t t-if="state.sebaceousActivity === 4">
+                                        <div class="mt-2">
+                                            <label class="form-label">Please specify:</label>
+                                            <input type="text" class="form-control" t-att-id="'sebaceousActivity_comment'"
+                                                t-model="state.sebaceousActivityComment"
+                                                placeholder="Enter your comment" />
+                                        </div>
+                                    </t>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="text-center">
+                                    <button type="submit" 
+                                        style="width: 100%; py-5"
+                                        class="btn btn-dark"
+                                        t-att-disabled="!isFormValid()">
+                                        Submit Consultation
+                                    </button>
+                                </div>
+                            </t>
+
+                            <!-- Stepper Navigation Buttons -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-secondary"
+                                    t-att-disabled="state.currentStep === 1"
+                                    t-on-click="prevStep">
+                                    Previous
+                                </button>
+                                <button type="button" class="btn btn-secondary"
+                                    t-on-click="nextStep"
+                                    t-att-disabled="state.currentStep === state.totalSteps"
+                                    >
+                                    Next
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

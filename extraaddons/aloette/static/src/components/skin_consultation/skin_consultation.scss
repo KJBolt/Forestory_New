@@ -1,0 +1,210 @@
+.skin-consultation {
+    height: 100vh;
+    padding: 0px 10px;
+    overflow-y: auto;
+    background-image: url('../../img/aloette.jpg');
+
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        height: 100%;
+        width: 60%;
+        padding: 0px 20px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 100px;
+    }
+
+    .card-header {
+        background-color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 1rem;
+    }
+
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 0;
+    }
+
+    // Progress Bar Styles
+    .progress-container {
+        margin-top: 1rem;
+        
+        .progress {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            
+            .progress-bar {
+                background: linear-gradient(90deg, #007bff, #0056b3);
+                height: 100%;
+                transition: width 0.3s ease;
+                border-radius: 4px;
+            }
+        }
+        
+        .step-counter {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+    }
+
+    // Step Content Styles
+    .step-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 400px;
+        
+        .step-title {
+            color: #007bff;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+    }
+    
+    
+
+    // Navigation Styles
+    .step-navigation {
+        margin-top: auto;
+        padding-top: 2rem;
+        border-top: 1px solid #e9ecef;
+        
+        .btn {
+            min-width: 120px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            
+            &:hover:not(:disabled) {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+            
+            i {
+                margin: 0 0.25rem;
+            }
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            
+            &:hover:not(:disabled) {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            
+            &:hover:not(:disabled) {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            
+            &:hover:not(:disabled) {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+        }
+    }
+
+    .form-check {
+        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+        
+        .form-check-input {
+            margin-top: 0.25rem;
+        }
+        
+        .form-check-label {
+            font-weight: 400;
+            cursor: pointer;
+            padding-left: 0.25rem;
+        }
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 1rem;
+        color: #495057;
+        line-height: 1.4;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        padding: 0.75rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        
+        &:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    }
+
+    .comment-field {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-color: #f8f9fa;
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: white;
+            
+            &:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .skin-consultation {
+        .card{
+            width: 100%;
+        }
+    }
+}
+    

@@ -1,0 +1,38 @@
+# ── Secrets / credentials ─────────────────────────────────────────
+# Postgres password file consumed by docker-compose secrets
+odoo_pg_pass
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+
+# ── Proprietary / rebranded Odoo Enterprise UI module ─────────────
+# Copied Enterprise source (OEEL-1) - must NOT be redistributed
+extraaddons/ofy_web_responsive/
+
+# ── Python ────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ── Editors / OS ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Odoo runtime / local data ─────────────────────────────────────
+config/odoo.conf
+*.log
+filestore/
